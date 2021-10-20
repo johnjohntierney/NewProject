@@ -30,17 +30,15 @@ export default function App() {
     } else {
       setSelectedImage({ localUri: pickerResult.uri, remoteUri: null });
     } 
-
-    setSelectedImage({ localUri: pickerResult.uri });
   };
 
   let openShareDialogAsync = async () => {
     if (!(await Sharing.isAvailableAsync())) {
-      alert(`Uh oh, sharing isn't available on your platform`);
+      alert(`The image is available for sharing at: ${selectedImage.remoteUri}`);
       return;
     }
 
-    await Sharing.shareAsync(selectedImage.localUri);
+    Sharing.shareAsync(selectedImage.localUri);
   }; 
 
   if (selectedImage !== null) {
